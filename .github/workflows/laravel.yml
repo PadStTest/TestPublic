@@ -1,0 +1,27 @@
+name: padsttest/action
+
+on: push # Trigger on any push
+
+jobs:
+  code_style:
+    name: PSR2 code style check
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: php7.4
+          coverage: none
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-suggest --no-interaction --optimize-autoloader
+
+      - name: Run style check
+        id: style_check
+        run: vendor/bin/phpcs app
