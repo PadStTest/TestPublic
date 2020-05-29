@@ -24,4 +24,4 @@ jobs:
 
       - name: Run style check
         id: style_check
-        run: vendor/bin/phpcs
+        run: vendor/bin/phpcs app
